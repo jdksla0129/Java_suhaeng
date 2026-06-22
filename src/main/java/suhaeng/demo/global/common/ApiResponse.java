@@ -1,4 +1,4 @@
-package java.suhaeng.demo.global.common;
+package suhaeng.demo.global.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.http.HttpStatus;

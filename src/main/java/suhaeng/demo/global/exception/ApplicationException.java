@@ -1,8 +1,8 @@
-package java.suhaeng.demo.global.exception;
+package suhaeng.demo.global.exception;
 
 import lombok.Getter;
 
-import java.suhaeng.demo.global.exception.statuscode.StatusCode;
+import suhaeng.demo.global.exception.statuscode.StatusCode;
 
 @Getter
 public class ApplicationException extends RuntimeException {

@@ -1,4 +1,4 @@
-package java.suhaeng.demo.global.exception.statuscode;
+package suhaeng.demo.global.exception.statuscode;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

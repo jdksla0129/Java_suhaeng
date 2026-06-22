@@ -3,7 +3,9 @@ package suhaeng.demo.domain.tomato.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,20 @@ import suhaeng.demo.global.common.ApiResponse;
 @Slf4j
 public class TomatoController {
     private final TomatoService tomatoService;
+
+    @GetMapping("/get/tomato-record")
+    public ApiResponse<Object> getTomatoRecord() {
+        log.info("get tomato-record");
+        return ApiResponse.ok("토마토 기록지를 불러오는데 성공하셨습니다!");
+    }
+
+    @PostMapping("/post/tomato-state/{date}")
+    public ApiResponse<Object> postTomatoState(@PathVariable("date") int date) {
+        log.info("post tomato-state || " + date);
+
+        //        return ApiResponse.created(,"오늘의 토마토 상태를 기록하셨습니다!");
+        return ApiResponse.ok("데이터 등록에 성공하셨습니다!");
+    }
 
     @PutMapping("/{id}")
     public ApiResponse<Boolean> updateTomato(@PathVariable("id") Long id, @RequestBody UpdateTomatoRequest request) {

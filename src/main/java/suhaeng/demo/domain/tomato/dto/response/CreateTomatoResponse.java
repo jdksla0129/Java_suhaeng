@@ -1,4 +1,4 @@
-package java.suhaeng.demo.domain.tomato.dto.response;
+package suhaeng.demo.domain.tomato.dto.response;
 
 public record CreateTomatoResponse(
         String title,

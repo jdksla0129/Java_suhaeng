@@ -1,4 +1,4 @@
-package java.suhaeng.demo.global.common;
+package suhaeng.demo.global.common;
 
 import java.time.LocalDateTime;
 import java.util.Map;

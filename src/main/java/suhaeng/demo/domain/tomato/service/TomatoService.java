@@ -1,12 +1,12 @@
-package java.suhaeng.demo.domain.tomato.service;
+package suhaeng.demo.domain.tomato.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.suhaeng.demo.domain.tomato.entity.Tomato;
-import java.suhaeng.demo.domain.tomato.exception.TomatoStatusCode;
-import java.suhaeng.demo.domain.tomato.repository.TomatoRepository;
-import java.suhaeng.demo.global.exception.ApplicationException;
+import suhaeng.demo.domain.tomato.entity.Tomato;
+import suhaeng.demo.domain.tomato.exception.TomatoStatusCode;
+import suhaeng.demo.domain.tomato.repository.TomatoRepository;
+import suhaeng.demo.global.exception.ApplicationException;
 
 @Service
 @RequiredArgsConstructor

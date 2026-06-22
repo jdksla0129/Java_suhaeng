@@ -1,10 +1,10 @@
-package java.suhaeng.demo.domain.tomato.exception;
+package suhaeng.demo.domain.tomato.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
-import java.suhaeng.demo.global.exception.statuscode.StatusCode;
+import suhaeng.demo.global.exception.statuscode.StatusCode;
 
 @Getter
 @RequiredArgsConstructor

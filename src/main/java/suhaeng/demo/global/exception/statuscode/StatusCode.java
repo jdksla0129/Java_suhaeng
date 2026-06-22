@@ -1,11 +1,11 @@
-package java.suhaeng.demo.global.exception.statuscode;
+package suhaeng.demo.global.exception.statuscode;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import java.suhaeng.demo.global.common.ApiResponse;
-import java.suhaeng.demo.global.common.ErrorResponse;
+import suhaeng.demo.global.common.ApiResponse;
+import suhaeng.demo.global.common.ErrorResponse;
 import java.util.Map;
 
 public interface StatusCode {

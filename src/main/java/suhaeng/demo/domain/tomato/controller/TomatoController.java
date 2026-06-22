@@ -1,9 +1,9 @@
-package java.suhaeng.demo.domain.tomato.controller;
+package suhaeng.demo.domain.tomato.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.suhaeng.demo.domain.tomato.service.TomatoService;
+import suhaeng.demo.domain.tomato.service.TomatoService;
 
 @RestController
 @RequestMapping("/api/tomatoes")

@@ -1,4 +1,4 @@
-package java.suhaeng.demo.global.exception.handler;
+package suhaeng.demo.global.exception.handler;
 
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +12,10 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.io.IOException;
-import java.suhaeng.demo.global.common.ApiResponse;
-import java.suhaeng.demo.global.exception.ApplicationException;
-import java.suhaeng.demo.global.exception.statuscode.CommonStatusCode;
-import java.suhaeng.demo.global.exception.statuscode.StatusCode;
+import suhaeng.demo.global.common.ApiResponse;
+import suhaeng.demo.global.exception.ApplicationException;
+import suhaeng.demo.global.exception.statuscode.CommonStatusCode;
+import suhaeng.demo.global.exception.statuscode.StatusCode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

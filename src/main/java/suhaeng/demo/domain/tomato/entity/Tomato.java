@@ -1,4 +1,4 @@
-package java.suhaeng.demo.domain.tomato.entity;
+package suhaeng.demo.domain.tomato.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

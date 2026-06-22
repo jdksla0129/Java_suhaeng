@@ -19,11 +19,11 @@ public class Tomato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;        // 일지 제목
-    private String content;      //일지 내용
-    private int wateringCount;   //물 준 횟수
-    private int leafCount;       // 잎사귀 갯수
-    private boolean pruned;      // 가지치기 여부
+    private String title;
+    private String content;
+    private int wateringCount;
+    private int leafCount;
+    private boolean pruned;
 
     @Builder
     public Tomato(String content, int wateringCount, int leafCount, boolean pruned) {
@@ -31,6 +31,10 @@ public class Tomato {
         this.content = content;
         this.wateringCount = wateringCount;
         this.leafCount = leafCount;
+        this.pruned = pruned;
+    }
+
+    public void updatePruned(boolean pruned) {
         this.pruned = pruned;
     }
 }

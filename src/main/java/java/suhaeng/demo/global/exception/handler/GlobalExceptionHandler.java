@@ -1,0 +1,115 @@
+package java.suhaeng.demo.global.exception.handler;
+
+import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
+
+import java.io.IOException;
+import java.suhaeng.demo.global.common.ApiResponse;
+import java.suhaeng.demo.global.exception.ApplicationException;
+import java.suhaeng.demo.global.exception.statuscode.CommonStatusCode;
+import java.suhaeng.demo.global.exception.statuscode.StatusCode;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+@Slf4j
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    private static final Set<String> CLIENT_ABORT_MESSAGES = Set.of(
+            "Broken pipe",
+            "Connection reset",
+            "Connection reset by peer",
+            "An established connection was aborted"
+    );
+
+    private boolean isClientAbort(Throwable ex) {
+        for (Throwable t = ex; t != null; t = t.getCause()) {
+            if (t instanceof IOException && t.getMessage() != null) {
+                String message = t.getMessage();
+                if (CLIENT_ABORT_MESSAGES.stream().anyMatch(message::contains)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @ExceptionHandler(ApplicationException.class)
+    public ResponseEntity<ApiResponse<Void>> handleApplicationException(ApplicationException ex) {
+        StatusCode statusCode = ex.getStatusCode();
+        String message = ex.getMessage() != null ? ex.getMessage() : statusCode.getMessage();
+        return statusCode.toEntity(message);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiResponse<Void>> handleValidationException(MethodArgumentNotValidException ex) {
+        Map<String, String> details = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach(error -> {
+            String field = ((FieldError) error).getField();
+            String message = error.getDefaultMessage() != null ? error.getDefaultMessage() : "잘못된 입력값 입니다.";
+            details.put(field, message);
+        });
+        return CommonStatusCode.INVALID_ARGUMENT.toEntity("요청값이 유효하지 않습니다.", details);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ApiResponse<Void>> handleConstraintViolationException(ConstraintViolationException ex) {
+        Map<String, String> details = new HashMap<>();
+        ex.getConstraintViolations().forEach(violation -> {
+            String fieldName = violation.getPropertyPath().toString();
+            String message = violation.getMessage();
+            details.put(fieldName, message);
+        });
+        return CommonStatusCode.INVALID_ARGUMENT.toEntity("요청값이 유효하지 않습니다.", details);
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ApiResponse<Void>> handleMissingServletRequestParameterException(MissingServletRequestParameterException ex) {
+        return CommonStatusCode.INVALID_ARGUMENT.toEntity("필수 파라미터가 누락되었습니다: " + ex.getParameterName());
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ApiResponse<Void>> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+        return CommonStatusCode.INVALID_ARGUMENT.toEntity("파라미터 타입이 잘못되었습니다: " + ex.getName());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiResponse<Void>> handleIllegalArgumentException(IllegalArgumentException ex) {
+        String message = ex.getMessage() != null ? ex.getMessage() : "잘못된 요청 파라미터입니다.";
+        return CommonStatusCode.INVALID_ARGUMENT.toEntity(message);
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleNoResourceFoundException(NoResourceFoundException ex) {
+        return CommonStatusCode.UNKNOWN_ENDPOINT.toEntity();
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<ApiResponse<Void>> handleIOException(IOException ex) {
+        if (isClientAbort(ex)) {
+            log.debug("클라이언트 연결이 끊겼습니다: {}", ex.getMessage());
+            return null;
+        }
+        log.error("IO 처리 중 에러가 발생했습니다.", ex);
+        return CommonStatusCode.INTERNAL_SERVER_ERROR.toEntity();
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse<Void>> handleException(Exception ex) {
+        if (isClientAbort(ex)) {
+            log.debug("클라이언트 연결이 끊겼습니다.: {}", ex.getMessage());
+            return null;
+        }
+        log.error("요청 처리 중 에러가 발생했습니다.", ex);
+        return CommonStatusCode.INTERNAL_SERVER_ERROR.toEntity();
+    }
+}

@@ -31,7 +31,7 @@ public class Tomato {
     private boolean pruned;      // 가지치기 여부
 
     @Builder
-    public Tomato(String content, int wateringCount, int leafCount, boolean pruned, String fruit, String weather, int temperature) {
+    public Tomato(String content, int wateringCount, int leafCount, boolean pruned, int date, String time,String fruit, String weather, int temperature) {
         this.title = LocalDate.now().toString();
         this.content = content;
         this.wateringCount = wateringCount;

@@ -61,4 +61,8 @@ public class Tomato {
         this.temperature = request.temperature();
         this.dustConcentration = request.dustConcentration();
     }
+
+    public void updatePruned(boolean pruned) {
+        this.pruned = pruned;
+    }
 }

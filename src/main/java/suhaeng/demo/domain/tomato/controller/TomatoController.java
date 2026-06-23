@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import suhaeng.demo.domain.tomato.dto.request.UpdateTomatoRequest;
-import suhaeng.demo.domain.tomato.dto.response.CreateTomatoRequest;
+import suhaeng.demo.domain.tomato.dto.request.CreateTomatoRequest;
 import suhaeng.demo.domain.tomato.dto.response.TomatoRecordResponse;
 import suhaeng.demo.domain.tomato.service.TomatoService;
 import suhaeng.demo.global.common.ApiResponse;

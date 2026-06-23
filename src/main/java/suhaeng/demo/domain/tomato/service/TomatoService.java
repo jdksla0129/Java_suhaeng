@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import suhaeng.demo.domain.tomato.dto.request.UpdateTomatoRequest;
-import suhaeng.demo.domain.tomato.dto.response.CreateTomatoRequest;
+import suhaeng.demo.domain.tomato.dto.request.CreateTomatoRequest;
 import suhaeng.demo.domain.tomato.dto.response.TomatoRecordResponse;
 import suhaeng.demo.domain.tomato.entity.Tomato;
 import suhaeng.demo.domain.tomato.exception.TomatoStatusCode;

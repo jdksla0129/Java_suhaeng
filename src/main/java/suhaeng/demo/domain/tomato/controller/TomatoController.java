@@ -35,8 +35,7 @@ public class TomatoController {
     public ApiResponse<Object> postTomatoState(@PathVariable("date") int date) {
         log.info("post tomato-state || " + date);
 
-        //        return ApiResponse.created(,"오늘의 토마토 상태를 기록하셨습니다!");
-        return ApiResponse.ok("데이터 등록에 성공하셨습니다!");
+        return ApiResponse.created("오늘의 토마토 상태를 기록하셨습니다!");
     }
 
     @DeleteMapping("/{id}")

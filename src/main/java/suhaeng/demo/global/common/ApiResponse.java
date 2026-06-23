@@ -34,6 +34,10 @@ public record ApiResponse<T>(
         return of(HttpStatus.CREATED, message, data, null);
     }
 
+    public static <T> ApiResponse<T> created(String message) {
+        return of(HttpStatus.CREATED, message, null, null);
+    }
+
     public static <T> ApiResponse<T> error(HttpStatus status, ErrorResponse error) {
         return of(status, error.message(), null, error);
     }

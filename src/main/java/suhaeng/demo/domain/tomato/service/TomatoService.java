@@ -56,7 +56,6 @@ public class TomatoService {
                 "일지가 업데이트 됐습니다."
         );
     }
-}
 
     public void updatePruningStatus(Long id, boolean pruned) {
         Tomato tomato = tomatoRepository.findById(id)

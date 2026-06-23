@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,11 +32,12 @@ public class TomatoController {
         return tomatoService.getTomatoRecord();
     }
 
-    @PostMapping
-    public ApiResponse<Boolean> createTomatoState(
+    @PostMapping("/post/tomato-state/{date}")
+    public ApiResponse<Boolean> postTomatoState(
             @RequestBody CreateTomatoRequest request
     ) {
         return tomatoService.createTomatoState(request);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTomato(@PathVariable Long id) {

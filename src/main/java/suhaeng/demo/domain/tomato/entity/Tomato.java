@@ -35,7 +35,7 @@ public class Tomato {
     private Dust dustConcentration; // 미세먼지 농도
 
     @Builder
-    public Tomato(String content, int wateringCount, int leafCount, boolean pruned, int date, String time, String fruit, Weather weather, int temperature, Dust dustConcentration) {
+    public Tomato(String content, int wateringCount, int leafCount, boolean pruned, int date, String time,String fruit, Weather weather, int temperature, Dust dustConcentration) {
         this.title = LocalDate.now().toString();
         this.content = content;
         this.wateringCount = wateringCount;

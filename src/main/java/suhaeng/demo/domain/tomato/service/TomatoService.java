@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import suhaeng.demo.domain.tomato.dto.request.UpdateTomatoRequest;
+import suhaeng.demo.domain.tomato.dto.response.CreateTomatoRequest;
+import suhaeng.demo.domain.tomato.dto.response.TomatoRecordResponse;
 import suhaeng.demo.domain.tomato.entity.Tomato;
 import suhaeng.demo.domain.tomato.exception.TomatoStatusCode;
 import suhaeng.demo.domain.tomato.repository.TomatoRepository;
@@ -19,19 +21,21 @@ public class TomatoService {
     private final TomatoRepository tomatoRepository;
 
     @Transactional(readOnly = true)
-    public ApiResponse<List<Tomato>> getTomatoRecord() {
-        List<Tomato> tomatoes = tomatoRepository.findAll();
+    public ApiResponse<List<TomatoRecordResponse>> getTomatoRecord() {
+        List<TomatoRecordResponse> response = tomatoRepository.findAll()
+                .stream()
+                .map(TomatoRecordResponse::from)
+                .toList();
 
         return ApiResponse.ok(
-                tomatoes,
+                response,
                 "토마토 기록지를 불러오는데 성공하셨습니다!"
         );
     }
 
-    public ApiResponse<Boolean> createTomatoState(int date) {
-
+    public ApiResponse<Boolean> createTomatoState(CreateTomatoRequest request) {
         Tomato tomato = Tomato.builder()
-                .date(date)
+                .date(request.date())
                 .build();
 
         tomatoRepository.save(tomato);
@@ -43,7 +47,6 @@ public class TomatoService {
     }
 
     public ApiResponse<Boolean> updateTomato(Long id, UpdateTomatoRequest request) {
-
         Tomato tomato = tomatoRepository.findById(id)
                 .orElseThrow(() ->
                         new ApplicationException(

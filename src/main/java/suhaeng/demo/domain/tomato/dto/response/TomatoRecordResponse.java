@@ -3,7 +3,7 @@ package suhaeng.demo.domain.tomato.dto.response;
 import suhaeng.demo.domain.tomato.entity.Tomato;
 import suhaeng.demo.domain.tomato.enumeration.Weather;
 
-public record CreateTomatoResponse(
+public record TomatoRecordResponse(
         String title,
         int date,
         String time,
@@ -15,8 +15,8 @@ public record CreateTomatoResponse(
         int leafCount,
         boolean pruned
 ) {
-    public static CreateTomatoResponse from(Tomato tomato) {
-        return new CreateTomatoResponse(
+    public static TomatoRecordResponse from(Tomato tomato) {
+        return new TomatoRecordResponse(
                 tomato.getTitle(),
                 tomato.getDate(),
                 tomato.getTime(),

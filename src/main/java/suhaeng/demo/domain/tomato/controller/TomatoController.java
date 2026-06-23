@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import suhaeng.demo.domain.tomato.dto.request.UpdateTomatoRequest;
+import suhaeng.demo.domain.tomato.entity.Tomato;
 import suhaeng.demo.domain.tomato.service.TomatoService;
 import suhaeng.demo.global.common.ApiResponse;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/tomato")
@@ -22,17 +25,17 @@ public class TomatoController {
     private final TomatoService tomatoService;
 
     @GetMapping("/get/tomato-record")
-    public ApiResponse<Object> getTomatoRecord() {
+    public ApiResponse<List<Tomato>> getTomatoRecord() {
         log.info("get tomato-record");
-        return ApiResponse.ok("토마토 기록지를 불러오는데 성공하셨습니다!");
+        return tomatoService.getTomatoRecord();
     }
 
     @PostMapping("/post/tomato-state/{date}")
-    public ApiResponse<Object> postTomatoState(@PathVariable("date") int date) {
-        log.info("post tomato-state || " + date);
-
-        //        return ApiResponse.created(,"오늘의 토마토 상태를 기록하셨습니다!");
-        return ApiResponse.ok("데이터 등록에 성공하셨습니다!");
+    public ApiResponse<Boolean> postTomatoState(
+            @PathVariable("date") int date
+    ) {
+        log.info("post tomato-state || {}", date);
+        return tomatoService.createTomatoState(date);
     }
 
     @PutMapping("/{id}")

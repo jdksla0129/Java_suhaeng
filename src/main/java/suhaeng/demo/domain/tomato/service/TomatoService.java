@@ -48,16 +48,26 @@ public class TomatoService {
 
     public ApiResponse<Boolean> updateTomato(Long id, UpdateTomatoRequest request) {
         Tomato tomato = tomatoRepository.findById(id)
-                .orElseThrow(() ->
-                        new ApplicationException(
-                                TomatoStatusCode.TOMATO_NOT_FOUND
-                        ));
-
+                .orElseThrow(() -> new ApplicationException(TomatoStatusCode.TOMATO_NOT_FOUND));
         tomato.updateTomato(request);
 
         return ApiResponse.ok(
                 Boolean.TRUE,
                 "일지가 업데이트 됐습니다."
         );
+    }
+}
+
+    public void updatePruningStatus(Long id, boolean pruned) {
+        Tomato tomato = tomatoRepository.findById(id)
+                .orElseThrow(() -> new ApplicationException(TomatoStatusCode.TOMATO_NOT_FOUND));
+
+        tomato.updatePruned(pruned);
+    }
+
+    public void deleteTomato(Long id) {
+        Tomato tomato = tomatoRepository.findById(id)
+                .orElseThrow(() -> new ApplicationException(TomatoStatusCode.TOMATO_NOT_FOUND));
+        tomatoRepository.delete(tomato);
     }
 }

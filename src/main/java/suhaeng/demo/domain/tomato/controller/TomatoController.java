@@ -1,5 +1,9 @@
 package suhaeng.demo.domain.tomato.controller;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,10 +39,21 @@ public class TomatoController {
             @RequestBody CreateTomatoRequest request
     ) {
         return tomatoService.createTomatoState(request);
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTomato(@PathVariable Long id) {
+        tomatoService.deleteTomato(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
     public ApiResponse<Boolean> updateTomato(@PathVariable("id") Long id, @RequestBody UpdateTomatoRequest request) {
         return tomatoService.updateTomato(id, request);
+    }
+
+    @PatchMapping("/{id}/pruned")
+    public ResponseEntity<Void> patchPruned(@PathVariable Long id, @RequestParam boolean pruned) {
+        tomatoService.updatePruningStatus(id, pruned);
+        return ResponseEntity.ok().build();
     }
 }

@@ -4,6 +4,7 @@ import suhaeng.demo.domain.tomato.entity.Tomato;
 import suhaeng.demo.domain.tomato.enumeration.Weather;
 
 public record TomatoRecordResponse(
+        Long id,
         String title,
         int date,
         String time,
@@ -17,6 +18,7 @@ public record TomatoRecordResponse(
 ) {
     public static TomatoRecordResponse from(Tomato tomato) {
         return new TomatoRecordResponse(
+                tomato.getId(),
                 tomato.getTitle(),
                 tomato.getDate(),
                 tomato.getTime(),

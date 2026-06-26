@@ -50,6 +50,7 @@ public class Tomato {
     }
 
     public void updateTomato(UpdateTomatoRequest request) {
+        this.title = request.title();
         this.content = request.content();
         this.wateringCount = request.wateringCount();
         this.leafCount = request.leafCount();

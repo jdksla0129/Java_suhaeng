@@ -7,6 +7,8 @@ import suhaeng.demo.domain.tomato.enumeration.Weather;
 
 public record UpdateTomatoRequest(
         @NotBlank
+        String title,
+        @NotBlank
         String content,
         @NotNull
         int wateringCount,

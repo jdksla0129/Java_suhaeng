@@ -35,7 +35,17 @@ public class TomatoService {
 
     public ApiResponse<TomatoRecordResponse> createTomatoState(CreateTomatoRequest request) {
         Tomato tomato = Tomato.builder()
-                .date(request.date())
+                .title(request.title()) //
+                .fruit(request.fruit())//
+                .time(request.time()) //
+                .leafCount(request.leafCount())//
+                .wateringCount(request.wateringCount())//
+                .temperature(request.temperature())//
+                .weather(request.weather())//
+                .date(request.date()) //
+                .content(request.content())//
+                .pruned(request.pruned())//
+                .dustConcentration(request.dustConcentration())//
                 .build();
 
         tomatoRepository.save(tomato);

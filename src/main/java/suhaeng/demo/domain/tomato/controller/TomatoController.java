@@ -1,5 +1,6 @@
 package suhaeng.demo.domain.tomato.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +47,7 @@ public class TomatoController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<Boolean> updateTomato(@PathVariable("id") Long id, @RequestBody UpdateTomatoRequest request) {
+    public ApiResponse<Boolean> updateTomato(@PathVariable("id") Long id, @RequestBody @Valid UpdateTomatoRequest request) {
         return tomatoService.updateTomato(id, request);
     }
 

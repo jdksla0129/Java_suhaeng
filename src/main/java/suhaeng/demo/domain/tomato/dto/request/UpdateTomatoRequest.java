@@ -21,7 +21,7 @@ public record UpdateTomatoRequest(
         @NotBlank
         String time,
         @NotBlank
-        String fruit,
+        int fruit,
         @NotNull
         Weather weather,
         @NotNull

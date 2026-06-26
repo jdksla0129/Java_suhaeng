@@ -13,7 +13,7 @@ public record CreateTomatoRequest(
         String time,
         String content,
          int wateringCount,
-         String fruit,
+         int fruit,
          Weather weather,
          int temperature,
          int leafCount,

@@ -33,7 +33,7 @@ public class TomatoService {
         );
     }
 
-    public ApiResponse<Boolean> createTomatoState(CreateTomatoRequest request) {
+    public ApiResponse<TomatoRecordResponse> createTomatoState(CreateTomatoRequest request) {
         Tomato tomato = Tomato.builder()
                 .date(request.date())
                 .build();
@@ -41,7 +41,7 @@ public class TomatoService {
         tomatoRepository.save(tomato);
 
         return ApiResponse.ok(
-                Boolean.TRUE,
+                TomatoRecordResponse.from(tomato),
                 "오늘의 토마토 상태를 기록하셨습니다!"
         );
     }

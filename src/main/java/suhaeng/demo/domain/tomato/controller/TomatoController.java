@@ -32,8 +32,8 @@ public class TomatoController {
         return tomatoService.getTomatoRecord();
     }
 
-    @PostMapping("/post/tomato-state/{date}")
-    public ApiResponse<Boolean> postTomatoState(
+    @PostMapping("/post/tomato-state")
+    public ApiResponse<TomatoRecordResponse> postTomatoState(
             @RequestBody CreateTomatoRequest request
     ) {
         return tomatoService.createTomatoState(request);

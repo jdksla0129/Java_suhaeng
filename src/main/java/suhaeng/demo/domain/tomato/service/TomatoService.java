@@ -33,15 +33,25 @@ public class TomatoService {
         );
     }
 
-    public ApiResponse<Boolean> createTomatoState(CreateTomatoRequest request) {
+    public ApiResponse<TomatoRecordResponse> createTomatoState(CreateTomatoRequest request) {
         Tomato tomato = Tomato.builder()
-                .date(request.date())
+                .title(request.title()) //
+                .fruit(request.fruit())//
+                .time(request.time()) //
+                .leafCount(request.leafCount())//
+                .wateringCount(request.wateringCount())//
+                .temperature(request.temperature())//
+                .weather(request.weather())//
+                .date(request.date()) //
+                .content(request.content())//
+                .pruned(request.pruned())//
+                .dustConcentration(request.dustConcentration())//
                 .build();
 
         tomatoRepository.save(tomato);
 
         return ApiResponse.ok(
-                Boolean.TRUE,
+                TomatoRecordResponse.from(tomato),
                 "오늘의 토마토 상태를 기록하셨습니다!"
         );
     }

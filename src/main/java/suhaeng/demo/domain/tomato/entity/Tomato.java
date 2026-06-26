@@ -27,7 +27,7 @@ public class Tomato {
     private String time;           // 일지를 쓴 시간
     private String content;        // 일지 내용
     private int wateringCount;     // 물 준 횟수
-    private int fruit;          // 열매 수
+    private int fruit;            // 열매 수
     private Weather weather;       // 기상 상태
     private int temperature;       // 온도
     private int leafCount;         // 잎사귀 갯수

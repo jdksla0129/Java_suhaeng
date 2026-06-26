@@ -20,7 +20,7 @@ public record UpdateTomatoRequest(
         int date,
         @NotBlank
         String time,
-        @NotBlank
+        @NotNull
         int fruit,
         @NotNull
         Weather weather,

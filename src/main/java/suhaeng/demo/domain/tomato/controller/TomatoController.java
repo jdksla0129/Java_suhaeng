@@ -1,5 +1,6 @@
 package suhaeng.demo.domain.tomato.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class TomatoController {
 
     @PostMapping("/post/tomato-state")
     public ApiResponse<TomatoRecordResponse> postTomatoState(
-            @RequestBody CreateTomatoRequest request
+            @RequestBody @Valid CreateTomatoRequest request
     ) {
         return tomatoService.createTomatoState(request);
     }

@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import suhaeng.demo.domain.tomato.dto.request.UpdateTomatoRequest;
+import suhaeng.demo.domain.tomato.dto.request.CreateTomatoRequest;
+import suhaeng.demo.domain.tomato.dto.response.TomatoRecordResponse;
 import suhaeng.demo.domain.tomato.service.TomatoService;
 import suhaeng.demo.global.common.ApiResponse;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/tomato")
@@ -26,16 +28,15 @@ public class TomatoController {
     private final TomatoService tomatoService;
 
     @GetMapping("/get/tomato-record")
-    public ApiResponse<Object> getTomatoRecord() {
-        log.info("get tomato-record");
-        return ApiResponse.ok("토마토 기록지를 불러오는데 성공하셨습니다!");
+    public ApiResponse<List<TomatoRecordResponse>> getTomatoRecord() {
+        return tomatoService.getTomatoRecord();
     }
 
     @PostMapping("/post/tomato-state/{date}")
-    public ApiResponse<Object> postTomatoState(@PathVariable("date") int date) {
-        log.info("post tomato-state || " + date);
-
-        return ApiResponse.created("오늘의 토마토 상태를 기록하셨습니다!");
+    public ApiResponse<Boolean> postTomatoState(
+            @RequestBody CreateTomatoRequest request
+    ) {
+        return tomatoService.createTomatoState(request);
     }
 
     @DeleteMapping("/{id}")
